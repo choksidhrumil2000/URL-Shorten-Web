@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/URL-Shorten-main/ci/';
+$config['base_url']	= 'http://localhost/URL-Shorten/ci/';
 
 /*
 |--------------------------------------------------------------------------
