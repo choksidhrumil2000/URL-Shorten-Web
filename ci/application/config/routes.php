@@ -38,7 +38,9 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "user_controller";
+$route['url_shorten_app'] = "user_controller/url_shorten_app";
+$route['url_shorten_app/(:any)'] = "user_controller/url_shorten_app";
 $route['404_override'] = '';
 
 

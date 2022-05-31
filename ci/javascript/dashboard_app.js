@@ -1,0 +1,1 @@
+var dashboardapp = angular.module('dashboardapp',['ui.router']);
