@@ -1,0 +1,13 @@
+
+    <h1 style="text-align: center; font-size: 40px;">Short URL Page</h1>
+    <div style="border: 2px solid black; 
+                display: inline-block;
+                justify-content: center;
+                padding: 10px;
+                margin-left: 500px;">
+    <form ng-submit="submit_short_url()">
+        URL: <input type="url" ng-model="user.url"><br>
+        <input type="submit" name="submit" value="Short-URL"> 
+    </form>
+    <br><br>Shorten URL: <a href="{{long_url}}" target="_blank">{{shorten_url}}</p>
+</div>

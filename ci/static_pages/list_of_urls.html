@@ -1,0 +1,22 @@
+<h1 style="text-align: center;font-size: 40px;">List Of URLS</h1>
+<div style="border: 2px solid black; 
+            display: inline-block;
+            justify-content: center;
+            padding: 10px;
+            margin-left: 300px;">
+    <table ng-hide="{{show_para}}" border="1">
+        <tr>
+            <th>url</th>
+            <th>shorten_url</th>
+            <th>click_count</th>
+            <th>Analytics</th>
+        </tr>
+        <tr ng-repeat = "x in urls">
+            <td>{{x.url}}</td>
+            <td><a href="{{x.url}}" target="_blank">{{x.shorten_url}}</a></td>
+            <td>{{x.click_count}}</td>
+            <td><a ui-sref="url_analytics">View Analytics</a></td>
+        </tr>
+    </table>
+    <p style="text-align: center;" ng-show="{{show_para}}">No Records Found!!!</p>
+</div>
