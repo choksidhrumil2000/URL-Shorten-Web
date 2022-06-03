@@ -88,16 +88,100 @@ class Dashboard_model extends CI_Model{
     }
     public function geturls($user_id)
     {
-        $this->db->select('id,url,shorten_url,created_date_time');
+        $this->db->select('id,url,shorten_url,created_date_time,url_part');
         $this->db->where(array('user_id'=>$user_id));
         $data = $this->db->get('urls');
         if($data->num_rows > 0){
             $urls['urls_array'] = $data->result_array();
+            $array_for_counts = array();
+            foreach($data->result_array() as $row){
+                $this->db->select('*');
+                $arr = array(
+                    'url_id'=>$row['id']
+                );
+                $this->db->where($arr);
+                $this->db->from('url_analytics');
+                $count = $this->db->count_all_results();
+                array_push($array_for_counts,$count);
+            }
+            $urls['count_of_urls'] = $array_for_counts;
+            $urls['check'] = true;
             return $urls;
         }else{
-            return array('check'=>false);
+            // return array('check'=>false);
+            $urls['check'] = false;
+            return $urls;
         }
 
+    }
+    public function geturldata_with_count($url_part)
+    {
+        $this->db->select('id,url,shorten_url,url_part');
+        $arr = array(
+            'url_part'=>$url_part
+        );
+        $this->db->where($arr);
+        $data = $this->db->get('urls');
+        if($data->num_rows >0){
+            $this->db->select('*');
+            $arr2 = array(
+                'url_id'=>$data->row()->id
+            ); 
+            $this->db->where($arr2);
+            $this->db->from('url_analytics');
+            $count = $this->db->count_all_results();
+            $url_data['check'] = true;
+            $url_data['long_url'] = $data->row()->url;
+            $url_data['short_url'] = $data->row()->shorten_url;
+            $url_data['click_count'] = $count;
+            $url_data['url_part'] = $data->row()->url_part;
+        }else{
+            $url_data['check'] = false;
+        }
+        return $url_data;
+    }
+    public function get_graph_data_array($graph_time,$url_part){
+        $this->db->select('id');
+        $this->db->where(array('url_part'=>$url_part));
+        $id_data = $this->db->get('urls');
+        if($id_data->num_rows > 0){
+            $url_id = $id_data->row()->id;
+        }
+        $graph_data = [];
+        $graph_data[] = array('Date','Click_count');
+        if($graph_time == 'last_week'){
+            for($i=-6;$i<=0;$i+=1){
+                $date = date('Y-m-d',strtotime($i." days"));
+                $this->db->select('*');
+                $this->db->where(array('url_id'=>$url_id,'DATE(time_at_click)'=>$date));
+                $this->db->from('url_analytics');
+                $count = $this->db->count_all_results();
+                $arr = array($date,$count);
+                $graph_data[] = $arr;
+            }
+        }else if($graph_time == 'last_month'){
+            for($i=-30;$i<=0;$i+=1){
+                $date = date('Y-m-d',strtotime($i." days"));
+                $this->db->select('*');
+                $this->db->where(array('url_id'=>$url_id,'DATE(time_at_click)'=>$date));
+                $this->db->from('url_analytics');
+                $count = $this->db->count_all_results();
+                $arr = array($date,$count);
+                $graph_data[] = $arr;
+            }
+        }else{
+            for($i=-60;$i<=0;$i+=1){
+                $date = date('Y-m-d',strtotime($i." days"));
+                $this->db->select('*');
+                $this->db->where(array('url_id'=>$url_id,'DATE(time_at_click)'=>$date));
+                $this->db->from('url_analytics');
+                $count = $this->db->count_all_results();
+                $arr = array($date,$count);
+                $graph_data[] = $arr;
+            }
+        }
+        $total_data['graph_data_array'] = $graph_data;
+        return $total_data;
     }
     // public function store_url_with_count($url_id)
     // {

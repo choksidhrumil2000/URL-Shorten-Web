@@ -4,7 +4,7 @@
             justify-content: center;
             padding: 10px;
             margin-left: 300px;">
-    <table ng-hide="{{show_para}}" border="1">
+    <table ng-hide="show_para" border="1">
         <tr>
             <th>url</th>
             <th>shorten_url</th>
@@ -14,9 +14,9 @@
         <tr ng-repeat = "x in urls">
             <td>{{x.url}}</td>
             <td><a href="{{x.url}}" target="_blank">{{x.shorten_url}}</a></td>
-            <td>{{x.click_count}}</td>
-            <td><a ui-sref="url_analytics">View Analytics</a></td>
+            <td>{{counts[$index]}}</td>
+            <td><a ui-sref="url_analytics" ng-click="geturl(x.url_part)">View Analytics</a></td>
         </tr>
     </table>
-    <p style="text-align: center;" ng-show="{{show_para}}">No Records Found!!!</p>
+    <p style="text-align: center;" ng-show="show_para">No Records Found!!!</p>
 </div>

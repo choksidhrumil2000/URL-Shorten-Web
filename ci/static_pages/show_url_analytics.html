@@ -1,2 +1,39 @@
-<h1>Welcome to URL Analytics!!!</h1>
-<a ui-sref="list_url">Back To Lists</a>
+
+<h1 style="text-align: center;">Welcome to URL Analytics!!!</h1>
+<a ui-sref="list_url">Back To Lists</a><br><br>
+<div style="border: 2px solid black; 
+            display: inline-block;
+            justify-content: center;
+            padding: 10px;
+            margin-left: 450px;">
+    Original URL: <a href="{{long_url}}" target="_blank">{{long_url}}</a><br>
+    Shorten URL: <a href="{{long_url}}" target="_blank">{{short_url}}</a><br>
+    Click Count: {{click_count}}
+</div>
+<div style="border: 2px solid black; 
+            display: inline-block;
+            justify-content: center;
+            padding: 10px;
+            margin-left: 450px;
+            margin-top: 40px;">
+    <div>
+        <button ng-click="data_function('last_week',url_part)">Last Week</button> |
+        <button ng-click="data_function('last_month',url_part)">Last Month</button> |
+        <button ng-click="data_function('last_two_month',url_part)">Last 2 Months</button>
+    </div>
+    <!-- <ui-view></ui-view> -->
+
+</div>
+<div id="line_chart" style="width: 900px;
+                            height: 500px;
+                            margin-left: 200px;
+                            margin-top:10px;" ng-show="show_graph">
+
+</div>
+<!-- <script src="https://www.google.com/jsapi"></script> -->
+<!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
+<!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  -->
+<!-- <script type="text/javascript" src="/URL-Shorten/ci/javascript/loader.js"></script>
+    <script type="text/javascript" src="/URL-Shorten/ci/javascript/google_chart.js"></script> -->
+
+               

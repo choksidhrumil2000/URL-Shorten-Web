@@ -41,13 +41,14 @@ dashboardapp.controller('urlctrl',function($scope,$http){
     //         });
     // };
 });
-dashboardapp.controller('listurlctrl',function($scope,$http){
+dashboardapp.controller('listurlctrl',function(PassDataService,$scope,$http){
     $user_id = sessionStorage.getItem('user_id');
     $http.get('/URL-Shorten/ci/dashboard_controller/geturlsdata/'+$user_id)
         .then(function(response){
-            console.log(response.data);
-            if(response.data != null){
+            // console.log(response.data);
+            if(response.data.check == true){
                 $scope.urls = response.data.urls_array;
+                $scope.counts = response.data.count_of_urls;
                 $scope.show_para = false;
             }else{
                 $scope.show_para = true;
@@ -55,6 +56,9 @@ dashboardapp.controller('listurlctrl',function($scope,$http){
         },function(){
             alert('There is some Failure in Retriving the data');
         });
+    $scope.geturl = function($url_part){
+        PassDataService.setValue($url_part);
+    };
     // $scope.count_func = function($url_id){
     //     $http.get('/URL-Shorten/ci/dashboard_controller/store_url_analytics/'+$url_id)
     //         .then(function(response){
@@ -67,6 +71,77 @@ dashboardapp.controller('listurlctrl',function($scope,$http){
     //             alert('There is some Failure in storing click count!!!');
     //         });
     // };
+});
+dashboardapp.controller('analyticsctrl',function(PassDataService,$scope,$http){
+    $url_part = PassDataService.getValue();
+    $scope.show_graph = false;
+    $http.get('/URL-Shorten/ci/dashboard_controller/geturldata/'+$url_part)
+        .then(function(response){
+            // console.log(response);
+            if(response.data.check == true){
+                $scope.long_url = response.data.long_url;
+                $scope.short_url = response.data.short_url;
+                $scope.click_count = response.data.click_count;
+                $scope.url_part = response.data.url_part;
+            }else{
+                alert('There is some error in retriving data in database!!!');
+            }
+        },function(){
+            alert('There is some failure in retriving url data!!!');
+        });
+    $scope.data_function = function($graph_time,$url_part){
+        $http.get('/URL-Shorten/ci/dashboard_controller/get_graph_data/'+$graph_time+'/'+$url_part)
+            .then(function(response){
+                if(response.data.graph_data_array != null){
+                    // console.log(response.data.graph_data_array);
+                    google.charts.load('current', {'packages':['line']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+
+                    // var data = new google.visualization.DataTable();
+                    // data.addColumn('date','Date');
+                    // data.addColumn('number',$graph_time);
+                    var data = google.visualization.arrayToDataTable(response.data.graph_data_array);
+                    // data.addRows(response.data.graph_data_array);
+                    var options = {
+                        chart: {
+                        title: 'click-count -> Time Graph',
+                        subtitle: 'URL-Shorten App graph'
+                        },
+                        width: 900,
+                        height: 500
+                    };
+
+                    var chart = new google.charts.Line(document.getElementById('line_chart'));
+
+                    chart.draw(data, google.charts.Line.convertOptions(options));
+                    }
+                    $scope.show_graph = true;
+                }else{
+                    $scope.show_graph = false;
+                    alert('There is an error in retriving the graph data');
+                }
+            },function(){
+                alert('There is some failure in retriving graph Data!!!');
+            });
+
+    };
+});
+dashboardapp.factory('PassDataService',function(){
+    var $url_part = "";
+    var service = {
+        setValue:setValue, 
+		getValue:getValue 
+    };
+    return service;
+    
+    function setValue($part){
+        $url_part = $part;
+    }
+    function getValue(){
+        return $url_part;
+    }
 });
 dashboardapp.config(function($stateProvider,$urlRouterProvider){
     var logout = {
@@ -90,7 +165,8 @@ dashboardapp.config(function($stateProvider,$urlRouterProvider){
     var url_analytics_state = {
         name:'url_analytics',
         url:'/url_analytics',
-        templateUrl:'/URL-Shorten/ci/static_pages/show_url_analytics.html'
+        templateUrl:'/URL-Shorten/ci/static_pages/show_url_analytics.html',
+        controller:'analyticsctrl'
     }
     $urlRouterProvider.otherwise('/short_url');
     $stateProvider.state(logout);
@@ -109,3 +185,4 @@ dashboardapp.run(function($rootScope,$http){
         alert('Failure in Showing User!!!');
     });
 });
+

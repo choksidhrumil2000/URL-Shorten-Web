@@ -4,6 +4,7 @@
         <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>URL Shorten Web App</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	    <script src="https://unpkg.com/@uirouter/angularjs@1.0.30/release/angular-ui-router.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
@@ -20,7 +21,7 @@
         <a ui-sref="list_url">List Of URLs Tab</a>
         </div>
         <ui-view></ui-view>
-
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="/URL-shorten/ci/javascript/dashboard_app.js"></script>
     </body>
 </html>

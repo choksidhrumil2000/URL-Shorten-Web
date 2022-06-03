@@ -35,6 +35,19 @@ class Dashboard_controller extends CI_Controller{
         $data = $this->dm->geturls($userid);
         echo json_encode($data);
     }
+    public function geturldata($url_part)
+    {
+        $data = $this->dm->geturldata_with_count($url_part);
+        echo json_encode($data);
+    }
+    public function get_graph_data()
+    {
+        $graph_time =  $this->uri->segment(3);
+        $url_part =  $this->uri->segment(4);
+        $data = $this->dm->get_graph_data_array($graph_time,$url_part);
+        echo json_encode($data);
+        
+    }
     // public function store_url_analytics($url_id){
     //     $data = $this->dm->store_url_with_count($url_id);
     //     echo json_encode((object)array('check'=>$data));
