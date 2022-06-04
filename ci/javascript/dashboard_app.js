@@ -1,8 +1,12 @@
 var dashboardapp = angular.module('dashboardapp',['ui.router']);
 dashboardapp.controller('logoutctrl',function($window){
     sessionStorage.clear();
-    alert('You have loggedOut Successfully!!');
-    $window.location.href = "/URL-Shorten/ci/user_controller/url_shorten_app";
+    // alert('You have loggedOut Successfully!!');
+    // $window.location.href = "/URL-Shorten/ci/user_controller/url_shorten_app";
+    swal("Success!!!", "You have loggedOut Successfully!!", "success")
+        .then(function(){
+                $window.location.href = '/URL-Shorten/ci/user_controller/url_shorten_app';                    
+        });
 });
 dashboardapp.controller('urlctrl',function($scope,$http){
     $user_id = sessionStorage.getItem('user_id');
@@ -16,16 +20,20 @@ dashboardapp.controller('urlctrl',function($scope,$http){
         }).then(function(response){
             //console.log(response);
             if(response.data.check == true){
-                alert('URL is successfully Shorten and Stored in Database!!!');
+                // alert('URL is successfully Shorten and Stored in Database!!!');
+                swal("Success!!", "URL is successfully Shorten and Stored in Database!!!", "success");
                 $scope.shorten_url = response.data.short_url;
                 $scope.long_url = response.data.long_url;
             }else if(response.data.check == false && !response.data.long_url){
-                alert('url cant be empty!!!');  
+                // alert('url cant be empty!!!');
+                swal("Error!!", "URL Cant be Empty!!", "info");  
             }else{
-                alert('There is error in Adding Url to the DataBase!!!');
+                swal("Error!!", "There is error in Adding Url to the DataBase!!!", "error");
+                // alert('There is error in Adding Url to the DataBase!!!');
             }
         },function(){
-            alert('Failure in URL Shortening!!!');
+            swal("Failure!!", "Failure in URL Shortening!!!", "error");
+            // alert('Failure in URL Shortening!!!');
         });
     };
     // $scope.count_func = function($short_url){
@@ -54,7 +62,8 @@ dashboardapp.controller('listurlctrl',function(PassDataService,$scope,$http){
                 $scope.show_para = true;
             }
         },function(){
-            alert('There is some Failure in Retriving the data');
+            // alert('There is some Failure in Retriving the data');
+            swal("Failure!!", "There is some Failure in Retriving the data", "error");
         });
     $scope.geturl = function($url_part){
         PassDataService.setValue($url_part);
@@ -84,10 +93,12 @@ dashboardapp.controller('analyticsctrl',function(PassDataService,$scope,$http){
                 $scope.click_count = response.data.click_count;
                 $scope.url_part = response.data.url_part;
             }else{
-                alert('There is some error in retriving data in database!!!');
+                // alert('There is some error in retriving data in database!!!');
+                swal("Error!!", "There is some error in retriving data in database!!!", "error");
             }
         },function(){
-            alert('There is some failure in retriving url data!!!');
+            // alert('There is some failure in retriving url data!!!');
+            swal("Failure!!", "There is some failure in retriving url data!!!", "error");
         });
     $scope.data_function = function($graph_time,$url_part){
         $http.get('/URL-Shorten/ci/dashboard_controller/get_graph_data/'+$graph_time+'/'+$url_part)
@@ -120,10 +131,13 @@ dashboardapp.controller('analyticsctrl',function(PassDataService,$scope,$http){
                     $scope.show_graph = true;
                 }else{
                     $scope.show_graph = false;
-                    alert('There is an error in retriving the graph data');
+                    // alert('There is an error in retriving the graph data');
+                    swal("Error!!", "There is an error in retriving the graph data", "error");
+
                 }
             },function(){
-                alert('There is some failure in retriving graph Data!!!');
+                // alert('There is some failure in retriving graph Data!!!');
+                swal("Failure!!", "There is some failure in retriving graph Data!!!", "error");
             });
 
     };
@@ -182,7 +196,8 @@ dashboardapp.run(function($rootScope,$http){
         $rootScope.firstname = response.data.firstname;
         $rootScope.lastname = response.data.lastname;
     },function(){
-        alert('Failure in Showing User!!!');
+        // alert('Failure in Showing User!!!');
+        swal("Failure!!", "Failure in Showing User!!!", "error");
     });
 });
 

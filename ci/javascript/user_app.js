@@ -9,15 +9,21 @@ user_app.controller('loginctrl',function($scope,$http,$window){
         }).then(function(response){
             if(response.data.check == true){
                 sessionStorage.setItem('user_id',response.data.id);
-                alert('Login Successfully!!!');
-                $window.location.href = "/URL-Shorten/ci/dashboard_controller/dashboard";
+                swal("Login Successfully!!", "Your Credentials match in the database!", "success")
+                .then(function(){
+                    $window.location.href = "/URL-Shorten/ci/dashboard_controller/dashboard";
+                });
+                // alert('Login Successfully!!!');
+                // $window.location.href = "/URL-Shorten/ci/dashboard_controller/dashboard";
             }else{
-                alert(response.data.error);
+                // alert(response.data.error);
+                swal("There is Some Error!!", response.data.error, "error");
                 $scope.user.email = "";
                 $scope.user.password = "";
             }
         },function(){
-            alert('Failure in Login !!!! Try Again!!!');
+            // alert('Failure in Login !!!! Try Again!!!');
+            swal("Failure!!!", "Failure in Login Try Again!!!", "error");
         });
     };
 });
@@ -32,16 +38,23 @@ user_app.controller('signupctrl',function($scope,$http,$window){
             if(response.data.check_email == false){
                 if(response.data.check == true){
                     sessionStorage.setItem('user_id',response.data.id);
-                    alert('User Added Successfully');
-                    $window.location.href = '/URL-Shorten/ci/dashboard_controller/dashboard';
+                    // alert('User Added Successfully');
+                    swal("Success!!!", "User Added Successfully!!", "success")
+                    .then(function(){
+                        $window.location.href = '/URL-Shorten/ci/dashboard_controller/dashboard';
+                    });
+                    // $window.location.href = '/URL-Shorten/ci/dashboard_controller/dashboard';
                 }else{
-                    alert('There is an error in adding user in database!!!');
+                    // alert('There is an error in adding user in database!!!');
+                    swal("DataBase Error!!", "There is an error in adding user in database!!!", "error");
                 }
             }else{
-                alert('Email Already Exists!! or Registered!!');
+                // alert('Email Already Exists!! or Registered!!');
+                swal("User Already Exist!!", "Email Already Registered!!!", "error");
             }
         },function(){
-            alert('There is some failure in adding user Try Again!!!');
+            // alert('There is some failure in adding user Try Again!!!');
+            swal("Failure!!!", "There is some failure in adding user Try Again!!!", "error");
         });
     };
 });
