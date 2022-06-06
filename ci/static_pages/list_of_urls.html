@@ -1,22 +1,25 @@
-<h1 style="text-align: center;font-size: 40px;">List Of URLS</h1>
-<div style="border: 2px solid black; 
-            display: inline-block;
+<!-- <div class="mdl-tabs__panel"> -->
+<h1 style="text-align: center;font-size: 40px;color: indigo;">List Of URLS</h1>
+<div style="display: inline-block;
             justify-content: center;
             padding: 10px;
-            margin-left: 300px;">
-    <table ng-hide="show_para" border="1">
+            margin-left: 250px;">
+    <table ng-hide="show_para" class="mdl-data-table mdl-js-data-table">
         <tr>
-            <th>url</th>
-            <th>shorten_url</th>
+            <th class="mdl-data-table__cell--non-numeric">url</th>
+            <th class="mdl-data-table__cell--non-numeric">shorten_url</th>
             <th>click_count</th>
-            <th>Analytics</th>
+            <th>Check Detail</th>
         </tr>
         <tr ng-repeat = "x in urls">
-            <td>{{x.url}}</td>
-            <td><a href="{{x.url}}" target="_blank">{{x.shorten_url}}</a></td>
+            <td class="mdl-data-table__cell--non-numeric">{{x.url}}</td>
+            <td class="mdl-data-table__cell--non-numeric"><a href="{{x.url}}" target="_blank">{{x.shorten_url}}</a></td>
             <td>{{counts[$index]}}</td>
-            <td><a ui-sref="url_analytics" ng-click="geturl(x.url_part)">View Analytics</a></td>
+            <!-- <td><a ui-sref="url_analytics" ng-click="geturl(x.url_part)">View Analytics</a></td> -->
+            <td><button ui-sref="url_analytics" ng-click="geturl(x.url_part)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
+                View Detailed Analytics</button></td>
         </tr>
     </table>
-    <p style="text-align: center;" ng-show="show_para">No Records Found!!!</p>
+    <p style="text-align: center;color: indigo;" ng-show="show_para">No Records Found!!!</p>
 </div>
+<!-- </div> -->

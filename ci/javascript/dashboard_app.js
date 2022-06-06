@@ -1,4 +1,18 @@
 var dashboardapp = angular.module('dashboardapp',['ui.router']);
+// dashboardapp.directive('menuClose', function() {
+//     return {
+//         restrict: 'AC',
+//         link: function($scope, $element) {
+//             $element.bind('click', function() {
+//                 var drawer = angular.element(document.querySelector('.mdl-layout__drawer'));
+//                 if(drawer) {
+//                     // drawer.toggleClass('is-visible');
+//                     drawer.toggleDrawer();
+//                 }
+//             });
+//         }
+//     };
+// });
 dashboardapp.controller('logoutctrl',function($window){
     sessionStorage.clear();
     // alert('You have loggedOut Successfully!!');

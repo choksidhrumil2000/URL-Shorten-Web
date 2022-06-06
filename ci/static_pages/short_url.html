@@ -1,13 +1,22 @@
-
-    <h1 style="text-align: center; font-size: 40px;">Short URL Page</h1>
-    <div style="border: 2px solid black; 
+<!-- <div class="mdl-tabs__panel"> -->
+    <h1 style="text-align: center; font-size: 40px;color: indigo;">Short URL Page</h1>
+    <div style="border: 2px solid indigo; 
                 display: inline-block;
                 justify-content: center;
                 padding: 10px;
-                margin-left: 500px;">
+                margin-left: 475px;">
     <form ng-submit="submit_short_url()">
-        URL: <input type="url" ng-model="user.url"><br>
-        <input type="submit" name="submit" value="Short-URL"> 
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="url" ng-model="user.url" id="url">
+            <label class="mdl-textfield__label" for="url">URL</label>
+        </div>
+        <br>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
+            Short URL</button>
+        <!-- URL: <input type="url" ng-model="user.url"><br> -->
+        <!-- <input type="submit" name="submit" value="Short-URL">  -->
     </form>
-    <br><br>Shorten URL: <a href="{{long_url}}" target="_blank">{{shorten_url}}</p>
-</div>
+    <br><br>
+    <p style="color: indigo; font-size: 20px;">Shorten URL: <a href="{{long_url}}" target="_blank" style="font-size:15px;">{{shorten_url}}</a></p>
+    </div>
+<!-- </div> -->

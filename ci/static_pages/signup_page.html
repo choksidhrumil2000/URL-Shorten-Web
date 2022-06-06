@@ -1,11 +1,32 @@
 <div>
     <form ng-submit="submit_signup()">
-        FirstName: <input type="text" ng-model="user.firstname"><br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" ng-model="user.firstname" id="fname">
+            <label class="mdl-textfield__label" for="fname">Firstname</label>
+        </div><br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" ng-model="user.lastname" id="lname">
+            <label class="mdl-textfield__label" for="lname">Lastname</label>
+        </div><br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="email" ng-model="user.email" id="email">
+            <label class="mdl-textfield__label" for="email">Email</label>
+        </div><br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" ng-model="user.password" id="password">
+            <label class="mdl-textfield__label" for="password">Password</label>
+        </div><br>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
+            Signup</button>
+        <!-- FirstName: <input type="text" ng-model="user.firstname"><br>
         LastName: <input type="text" ng-model="user.lastname"><br>
         Email: <input type="email" ng-model="user.email"><br>
-        password: <input type="password" ng-model="user.password"><br>
-        <input type="submit"  name="submit" value="Signup">
+        password: <input type="password" ng-model="user.password"><br> -->
+        <!-- <input type="submit"  name="submit" value="Signup"> -->
     </form>
-    <p>----------------OR----------------</p>
-    <button ui-sref="login">Login</button>
+    <p style="color: indigo;">--------------------------OR------------------------------</p>
+    <!-- <button ui-sref="login">Login</button> -->
+    <button ui-sref="login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color-text--white">
+        Login
+      </button>
 </div>

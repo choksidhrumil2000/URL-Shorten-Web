@@ -1,9 +1,36 @@
 <div>
     <form ng-submit="submit_login()">
-        Email: <input type="email" ng-model="user.email"><br>
-        password: <input type="password" ng-model="user.password"><br>
-        <input type="submit"  name="submit" value="Login">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="email" ng-model="user.email" id="email">
+            <label class="mdl-textfield__label" for="email">Email</label>
+        </div>
+        <br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" ng-model="user.password" id="password">
+            <label class="mdl-textfield__label" for="password">Password</label>
+        </div>
+        <br>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
+            Login</button>
+        <!-- Email: <input type="email" ng-model="user.email"><br> -->
+        <!-- password: <input type="password" ng-model="user.password"><br> -->
+        <!-- <input type="submit"  name="submit" value="Login"> -->
     </form>
-    <p>----------------OR----------------</p>
-    <button ui-sref="signup">Signup</button>
+    <p style="color: indigo;">--------------------------OR------------------------------</p>
+    <button ui-sref="signup" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color-text--white">
+        Signup
+      </button>
+    <!-- <button ui-sref="signup">Signup</button> -->
 </div>
+
+<!-- Material Design Lite Reference for Floating text field -->
+<!-- <form action="#">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="sample3">
+      <label class="mdl-textfield__label" for="sample3">Text...</label>
+    </div>
+  </form> -->
+<!-- Accent-colored raised button with ripple -->
+<!-- <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    Button
+  </button> -->
