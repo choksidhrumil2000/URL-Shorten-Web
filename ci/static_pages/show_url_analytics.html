@@ -1,4 +1,3 @@
-
 <h1 style="text-align: center;color: indigo;">URL Analytics</h1>
 <button ui-sref="list_url" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
     Back To Lists</button><br>
@@ -12,72 +11,33 @@
     <p style="color: indigo;font-size: 20px;">Shorten URL: <a href="{{long_url}}" target="_blank" style="font-size:15px;">{{short_url}}</a></p>
     <p style="color: indigo;font-size: 20px;">Click Count: {{click_count}}</p>
 </div>
-<div style="margin-left: 550px;margin-top: 30px;">
-    <button ng-click="data_function('last_week',url_part)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-        Show Analytics</button>
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+   <div class="mdl-tabs__tab-bar">
+      <a href="#tab1-panel" ng-click="data_function('last_week',url_part)" class = "mdl-tabs__tab is-active">Last Week</a>
+      <a href="#tab2-panel" ng-click="data_function('last_month',url_part)" class = "mdl-tabs__tab">Last Month</a>
+      <a href="#tab3-panel" ng-click="data_function('last_two_month',url_part)" class = "mdl-tabs__tab">Last Two Months</a>
+   </div>
+   
+   <div class="mdl-tabs__panel is-active" id="tab1-panel">
+         <div id="last_week" style="width: 900px;
+         height: 500px;
+         margin-left: 200px;
+         margin-top:10px;">
+         </div>
+   </div>
+   <div class="mdl-tabs__panel" id="tab2-panel">
+      <div id="last_month" style="width: 900px;
+      height: 500px;
+      margin-left: 200px;
+      margin-top:10px;">
+      </div>
+   </div>
+   <div class="mdl-tabs__panel" id="tab3-panel">
+      <div id="last_two_month" style="width: 900px;
+      height: 500px;
+      margin-left: 200px;
+      margin-top:10px;">
+      </div>
+   </div>
 </div>
-<!-- <div class = "mdl-layout mdl-js-layout" ng-show="show_graph"> -->
-<!-- <main class = "mdl-layout__content" ng-show="show_graph">    
-    <div class = "mdl-tabs mdl-js-tabs">
-       <div class = "mdl-tabs__tab-bar">
-          <a href = "#tab1-panel" ng-click="data_function('last_week',url_part)" class = "mdl-tabs__tab is-active">Last Week</a>
-          <a href = "#tab2-panel" ng-click="data_function('last_week',url_part)" class = "mdl-tabs__tab">Last Month</a>
-          <a href = "#tab3-panel" ng-click="data_function('last_week',url_part)" class = "mdl-tabs__tab">Last Two Months</a>
-       </div>
-    
-       <div class = "mdl-tabs__panel is-active" id = "tab1-panel">
-        <div id="line_chart" style="width: 900px;
-                            height: 500px;
-                            margin-left: 200px;
-                            margin-top:10px;" ng-show="show_graph">
-
-        </div>
-    </div>
-    
-       <div class = "mdl-tabs__panel" id = "tab2-panel">
-        <div id="line_chart" style="width: 900px;
-        height: 500px;
-        margin-left: 200px;
-        margin-top:10px;" ng-show="show_graph">
-
-        </div>
-       </div>
-    
-       <div class = "mdl-tabs__panel" id = "tab3-panel">
-        <div id="line_chart" style="width: 900px;
-        height: 500px;
-        margin-left: 200px;
-        margin-top:10px;" ng-show="show_graph">
-
-        </div>
-       </div>
-    </div>
- </main> -->
-<!-- </div>    -->
-<div style=" 
-            display: inline-block;
-            justify-content: center;
-            padding: 10px;
-            margin-left: 430px;
-            margin-top: 40px;" ng-show="show_graph">
-    <div>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="data_function('last_week',url_part)">Last Week</button> |
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="data_function('last_month',url_part)">Last Month</button> |
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="data_function('last_two_month',url_part)">Last 2 Months</button>
-    </div>
-    <!-- <ui-view></ui-view> -->
-
-</div>
-<div id="line_chart" style="width: 900px;
-                            height: 500px;
-                            margin-left: 200px;
-                            margin-top:10px;" ng-show="show_graph">
-
-</div>
-<!-- <script src="https://www.google.com/jsapi"></script> -->
-<!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
-<!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  -->
-<!-- <script type="text/javascript" src="/URL-Shorten/ci/javascript/loader.js"></script>
-    <script type="text/javascript" src="/URL-Shorten/ci/javascript/google_chart.js"></script> -->
-
                
